@@ -77,22 +77,34 @@ class Document:
 
     def pdf_to_json(self, pdf_path, verbose=True):
         """"""
-        tmp_path = os.path.join(os.path.dirname(os.path.realpath(__file__)), "tmp.json")
-        cmd = 'curl -v -H "Content-type: application/pdf" --data-binary @%s "http://scienceparse.allenai.org/v1" > %s' % \
-              (pdf_path, tmp_path)
+        file_name = pdf_path.split("\\")[-1]
+        file_name = file_name.split(".")[0]
+        json_path = os.path.join(os.path.dirname(os.path.realpath(__file__)), "%s.json" % file_name)
+        if not os.path.isfile(json_path):
+            open(json_path, "a").close()
+        assert os.path.isfile(json_path)
+
+        curl_cmd = "curl -v -H \"Content-type: application/pdf\" --data-binary @%s " \
+                   "\"http://scienceparse.allenai.org/v1\" > %s" % (pdf_path, json_path)
+
         if verbose:
-            print(cmd)
-        try:
-            scienceparse_dict = json.load(codecs.open(filename=tmp_path, mode='r', encoding='utf-8'))
-            os.path.dirname(os.path.realpath(__file__))
-            self.paper_identifier = ' - '.join([str(scienceparse_dict[key]) for key in ['title', 'year']])
-            json_path = os.path.join(self.out_dir, self.paper_identifier + ".json")
-            with open(json_path, 'w') as outfile:
-                json.dump(scienceparse_dict, outfile, indent=4)
+            print(curl_cmd)
+        quit()
 
+        codecs_open = codecs.open(filename=json_path, mode='r', encoding='utf-8')
+        scienceparse_dict = json.load(codecs_open)
+        assert isinstance(scienceparse_dict, dict)
 
-        except FileNotFoundError as fnfe:
-            print(fnfe)
+        print(json_path)
+        quit()
+
+        os.path.dirname(os.path.realpath(__file__))
+        self.paper_identifier = ' - '.join([str(scienceparse_dict[key]) for key in ['title', 'year']])
+        json_path = os.path.join(self.out_dir, self.paper_identifier + ".json")
+        print(json_path)
+        quit()
+        with open(json_path, 'w') as outfile:
+            json.dump(scienceparse_dict, outfile, indent=4)
 
         return scienceparse_dict
 
@@ -208,19 +220,18 @@ def pdf2go_service(in_directories, out_dir):
 
     # Look for New Docs
     for dir_path in in_directories:
-        os.chdir(dir_path)
-        for file in glob.glob("*.pdf"):
+        all_pdfs = glob.glob("%s\\*.pdf" % dir_path)
+        for file in all_pdfs:
             if file not in processed:
                 file_path = os.path.join(dir_path, file)
-                print('File: ', file_path)
+                print('\nStarting File: ', file_path)
+
                 doc = Document(file_path, out_dir)
                 print(doc)
                 print(doc.save(out_dir))
 
-                print('Quiting Early')
-                quit()
-
 
 if __name__ == '__main__':
     test_path = os.path.dirname(os.path.realpath(__file__))
-    pdf2go_service([os.path.join(test_path, "test_docs")], "C:\\Users\\licun\\Documents\\PDF2GO")
+    pdf2go_service([os.path.join(test_path, "test_docs")],
+                   "C:\\Users\\licun\\Documents\\PDF2GO")
