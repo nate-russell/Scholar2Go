@@ -115,7 +115,11 @@ if __name__ == '__main__':
         "Sally sold seashells by the seashore",
         "RNN, DNN, GAN, VAE, Transformer, ReLu, CNN, polymatroid, word2vec, node2vec, TSNE, UMAP, ESPNet, GROBID",
         "R N N, D N N, GAN, V A E, Transformer, Re Lu, C N N, polymatroid, word-2-vec, node-2-vec, TSNE, UMAP, E-S-P-Net, GROBID",
-        "achiral, nucleophile, valence isomerisation, tautomer, hydroboration"
+        "achiral, nucleophile, valence isomerisation, tautomer, hydroboration",
+        "      Convert research papers into M-P-Threes so you can listen to papers while you're on the go! (Think Audio book,  but with an A-I Narrator)" \
+        "Survey some papers while: Commuting, Cooking, Cleaning, Exercising, Waiting for a slow build process or model training. Load up the latest conference proceedings on to your mobile device and start listening to all the abstracts to find " \
+        "something interesting OR Try listening to a whole paper while you cook dinner."
+
     ]
 
     tts = TTS()

@@ -3,19 +3,126 @@
 <head>
     <meta charset="UTF-8">
     <title>Scholar 2 Go</title>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&family=Raleway&display=swap"
+          rel="stylesheet">
+    <style>
+
+
+        body {
+            background-color: white;
+            margin: 0px;
+        }
+
+        #navbar {
+            background-color: royalblue;
+            margin: 0px;
+            padding: 0px;
+            width: 100%;
+            height: 50px;
+            vertical-align: center;
+            color: white;
+            font-size: 20px;
+            font-family: 'Open Sans', sans-serif;
+        }
+
+        #desc {
+            margin: 10px;
+            text-align: left;
+            font-size: larger;
+            border-radius: 20px;
+            background-color: #f1f3f4;
+            padding: 20px;
+            font-family: 'Raleway', sans-serif;
+        }
+
+        .myheader {
+            color: royalblue;
+            font-family: 'Open Sans', sans-serif;
+            font-size: 25px;
+        }
+
+        .column {
+            margin: 20px;
+        }
+
+        .wrapper {
+            display: grid;
+            grid-template-columns: 20% 40% 38%;
+            margin: 10px;
+        }
+
+    </style>
+
 </head>
+
+<div id="navbar" class="wrapper">
+    <div>
+        Scholar 2 Go
+    </div>
+    <div>
+        <a href="https://github.com/nate-russell/Scholar2Go" style="justify-self: right; color: white">
+            link to Github Repo
+        </a>
+    </div>
+
+</div>
+
 <body>
 
 
-<h1> Scholar 2 Go</h1>
+<div class="wrapper">
+    <div id="desc" class="column">
 
-testing out if the audio file shows and plays well on github pages
-<audio
-        controls
-        src="demo_resources/test%200.mp3">
-    Your browser does not support the
-    <code>audio</code> element.
-</audio>
+        <div class="myheader">About</div>
+        <audio controls src="demo_resources/test%200.mp3"> Your browser does not support the <code>audio</code> element.
+        </audio>
+
+        <p>
+            Convert scholarly articles into MP3s so you can listen to papers while you're on the go! (Think Audiobook but with an ML Narrator)
+            Survey some papers while: Commuting, Cooking, Cleaning, Exercising, Waiting for a slow build process or model training. Load up the latest conference proceedings onto your mobile device and start listening to all the abstracts to find something interesting OR Try listening to a whole paper while you cook dinner.
+
+            Pre-trained Machine Learning models parse a PDF into sections and Pre-trained
+            Text-To-Speech models generate audio files for each section. You end up with an mp3 album where each audio
+            track is a section of the paper and the album name is the name of the paper.
+
+            It tries to skip over
+            formulas/diagrams/tables.
+            Even if the formulas could be parsed consistently, I Know I couldn't understand it by just listening anyway.
+            Hopefully the audio files sans math and diagrams are enough to get the high level content so you know what
+            to
+            spend
+            time on when you get to the lab/office.
+        </p>
+        <p>
+            All the heavy lifting is done by <a href="https://github.com/kermitt2/grobid"> Grobid </a> and
+            <a href="https://github.com/espnet/espnet">ESPNet</a> pre-trained models. Check them out! This project just
+            glues
+            them together, adding some convenience. There is some extra stuff related to transforming GROBID XML into a
+            text
+            that can be readily read aloud.
+        </p>
+    </div>
+    <div class="column">
+        <div class="myheader">Example PDF</div>
+        <p></p>
+        <embed src="demo_resources/2003.08505v1.pdf#page=1" type="application/pdf" width="100%" height="100%">
+    </div>
+    <div class="column">
+        <div class="myheader">Abstract</div>
+        <p>
+            "Sally sold seashells by the seashore."
+        </p>
+        <audio controls src="demo_resources/test%200.mp3"> Your browser does not support the <code>audio</code> element.
+        </audio>
+
+        <div class="myheader">Introduction</div>
+        <p>
+            "Some Common ML phrases"
+        </p>
+        <audio controls src="demo_resources/test%202.mp3"> Your browser does not support the <code>audio</code> element.
+        </audio>
+    </div>
+</div>
 
 
 </body>
